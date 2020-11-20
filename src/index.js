@@ -1,4 +1,5 @@
 import fs from 'fs'
+import _ from 'lodash'
 console.log('======================== read text ======')
 fs.readFile('./data/dataset1.txt', 'utf8', (err, data) => {
   if (err) {
@@ -17,5 +18,5 @@ fs.readFile('./data/json1.txt', 'utf8', (err, data) => {
   const json = JSON.parse(data)
   console.log({ json })
   console.log(typeof json)
-  console.log({ 'json.array': json.array })
+  console.log({ 'json.array': _.get(json, 'array') })
 })
