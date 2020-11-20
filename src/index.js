@@ -10,21 +10,20 @@ fs.readFile('./data/instances.json', 'utf8', (err, data) => {
     const rM = maison.values.map((valeurObjet, i) => {
       return valeurObjet / maison.weights[i]
     })
-    // indexes to sort
+    // indexes to sort : [0,1,2,...,maison.items]
     const indexes = []
     for (let j = 0; j < maison.items; j++) {
       indexes.push(j)
     }
-    const indexes2 = [...indexes]
-    // sort
-    indexes2.sort((a, b) => {
+    // sort objects by decreasing rentability
+    indexes.sort((a, b) => {
       return (rM[b] - rM[a])
     })
-    // indexes of more expensive per kilo first
-    const solutionMaison = new Array(maison.items)
-    let poidRestant = maison.capacity
 
-    const maisonSolution = indexes2.map(k => {
+    const solutionMaison = new Array(maison.items)
+    // indexes of more expensive per kilo first
+    let poidRestant = maison.capacity
+    const maisonSolution = indexes.map(k => {
       const poid = maison.weights[k]
       if (poid <= poidRestant) {
         poidRestant = poidRestant - poid
