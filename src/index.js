@@ -20,3 +20,13 @@ fs.readFile('./data/json1.txt', 'utf8', (err, data) => {
   console.log(typeof json)
   console.log({ 'json.array': _.get(json, 'array') })
 })
+
+console.log('================ write text ==========')
+fs.writeFile(
+  './output/helloworld.txt',
+  'Hello World!',
+  function (err) {
+    if (err) return console.log(err)
+    console.log('Hello World > helloworld.txt')
+  }
+)
